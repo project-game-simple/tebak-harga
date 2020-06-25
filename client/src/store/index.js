@@ -5,11 +5,16 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    nickname: '',
   },
   mutations: {
+    SET_NICKNAME(state, nick) {
+      state.nickname = nick
+    },
   },
   actions: {
-  },
-  modules: {
-  },
+    setNickname({ commit }, nick) {
+      commit('SET_NICKNAME', nick)
+    },
+  }
 });
