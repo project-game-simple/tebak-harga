@@ -4,7 +4,9 @@
       <div class="form-group border border-light rounded shadow p-5">
         <label>Please input nickname</label>
         <input class="form-control" type="text" placeholder="nickname" v-model="nickname">
-        <button class="btn btn-info mt-2" @click="setNickname">Submit</button>
+        <router-link to="/lobby">
+          <button class="btn btn-info mt-2" @click="setNickname">Submit</button>
+        </router-link>
       </div>
     </div>
   </div>
