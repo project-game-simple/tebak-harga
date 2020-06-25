@@ -5,9 +5,10 @@ module.exports = (sequelize, DataTypes) => {
   class Product extends Model {}
 
   Product.init({
-    title: DataTypes.STRING,
+    name: DataTypes.STRING,
     image_url: DataTypes.STRING,
-    price: DataTypes.INTEGER,
+    real_price: DataTypes.INTEGER,
+    sale_price: DataTypes.INTEGER,
     category: DataTypes.STRING
   }, {
     sequelize,
