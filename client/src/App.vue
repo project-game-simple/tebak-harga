@@ -6,3 +6,13 @@
     <router-view/>
   </div>
 </template>
+
+<script>
+  export default {
+    created() {
+      if (localStorage.nickname) {
+        this.$store.dispatch('setNickname', localStorage.nickname)
+      }
+    } 
+  }
+</script>
