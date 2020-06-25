@@ -31,6 +31,12 @@
 
 <script>
     export default {
-
+        name: 'Gameplay',
+        data() {
+            return {
+                fashion: [],
+                
+            };
+        },
     }
 </script>
