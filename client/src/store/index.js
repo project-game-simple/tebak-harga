@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     nickname: '',
     products: [],
+    category: ''
   },
   mutations: {
     SET_NICKNAME(state, nick) {
@@ -16,6 +17,9 @@ export default new Vuex.Store({
     SET_PRODUCTS(state, data) {
       state.products = data
     },
+    SET_CATEGORY(state, category) {
+      state.category = category
+    },
   },
   actions: {
     setNickname({ commit }, nick) {
@@ -23,12 +27,19 @@ export default new Vuex.Store({
     },
     getProducts({ commit }) {
       http.get('/')
-      .then(data => {
+      .then(({ data }) => {
         commit('SET_PRODUCTS', data)
       })
       .catch(err => {
         throw(err)
       })
-    }
+    },
+    setCategory({ commit }, category) {
+      if(localStorage.category) {
+        commit('SET_CATEGORY', localStorage.category)
+      } else {
+        commit('SET_CATEGORY', category)
+      }
+    },
   }
 });

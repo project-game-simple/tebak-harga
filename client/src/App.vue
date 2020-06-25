@@ -13,6 +13,7 @@
       if (localStorage.nickname) {
         this.$store.dispatch('setNickname', localStorage.nickname)
         this.$store.dispatch('getProducts')
+        this.$store.dispatch('setCategory')
       }
     } 
   }

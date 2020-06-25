@@ -8,13 +8,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
+      name: {
         type: Sequelize.STRING
       },
       image_url: {
         type: Sequelize.STRING
       },
-      price: {
+      real_price: {
+        type: Sequelize.INTEGER
+      },
+      sale_price: {
         type: Sequelize.INTEGER
       },
       category: {
