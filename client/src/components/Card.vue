@@ -17,21 +17,31 @@
                         </p>
                     </div>
                 </div>
+               
                 <div class="mt-3 d-flex">
-                    <input class="form-control shadow-sm" type="number" min="0" v-model="price" placeholder="guess price">
+                    <input class="form-control shadow-sm" type="number" min="0" 
+                        v-model="price" placeholder="guess price" ref="inputPrice">
                     <button 
-                        class="ml-3 btn btn-primary shadow" data-toggle="modal" data-target="#ModalComplete" 
+                        class="ml-3 btn btn-primary shadow" 
+                        data-toggle="modal" data-target="#ModalComplete" 
                         @click="answer(products[0].id)"
                     >Submit</button>
-                    
                 </div>
-                <div>
-                    <small class="text-danger" v-if="!isTrue">Wrong answer</small>
+
+                <div class="mt-3 " v-if="!isTrue">
+                    <div class="alert alert-danger alert-dismissible fade show mb-0 p-0" role="alert">
+                        <small class="text-dark" >Wrong answer!</small>
+                        <button type="button" class="close p-0" data-dismiss="alert" aria-label="Close"
+                            @click="isTrue = true"
+                        >
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <ModalComplete v-if="products.length == 0"></ModalComplete>
+        <ModalComplete v-if="isDone"></ModalComplete>
 
     </div>
 </template>
@@ -46,7 +56,8 @@
             return {
                 products: [],
                 price: '',
-                isTrue: true
+                isTrue: true,
+                isDone: false,
             };
         },
         components: { 
@@ -60,9 +71,11 @@
                     this.price = ''
                     this.isTrue = true
                     this.products.shift()
+                    this.products.length == 0 ? this.isDone = true : false
                     
                 } else {
                     this.isTrue = false
+                    this.$refs.inputPrice.select()
                 }
             },
         },
@@ -70,7 +83,10 @@
             fetchPoducts() {
                 if (this.products.length != 0) {
                     return this.products
+                } else if (this.isDone) {
+                    return this.products
                 }
+
                 const datas = this.$store.state.products
                 this.products = []
 
