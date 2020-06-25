@@ -1,6 +1,6 @@
 <template>
     <div class="d-flex flex-wrap justify-content-center mb-5">
-        <div class="card shadow rounded m-3" v-if="products.length !== 0" style="max-width: 450px !important;">
+        <div class="card shadow rounded m-3" v-if="fetchPoducts.length !== 0" style="max-width: 450px !important;">
             <img :src="products[0].image_url" class="card-img-top" alt="img" >
             <div class="card-body">
                 <h5 class="card-title">{{ products[0].name }}</h5>
@@ -66,18 +66,38 @@
                 }
             },
         },
-        created() {
-            const datas = this.$store.state.products
-            datas.forEach(el => {
-                if (el.category == this.$store.state.category) {
-                    let hidden = String(el.sale_price).split('')
-                    hidden[hidden.length-4] = '?'
-
-                    el.hidden_price = hidden.join('')
-                    this.products.push(el)
-
+        computed: {
+            fetchPoducts() {
+                if (this.products.length != 0) {
+                    return this.products
                 }
-            })
-        }
+                const datas = this.$store.state.products
+                this.products = []
+
+                datas.forEach(el => {
+                    if (el.category == this.$store.state.category) {
+                        const nf2 = new Intl.NumberFormat()
+                        const temp = nf2.format(el.real_price)
+
+                        const nf = new Intl.NumberFormat()
+                        let hidden = nf.format(el.sale_price).split('')
+                        hidden[hidden.length-6] = '?'
+
+                        el.hidden_price = hidden.join('')
+
+                        if(temp != NaN) el.real_price = temp
+
+                        this.products.push(el)
+
+                    }
+                })
+                return this.products
+            }
+        },
+        created() {
+            this.$store.dispatch('getProducts')
+            this.$store.dispatch('setCategory', localStorage.category)
+            
+        },
     }
 </script>

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import http from '@/config/axios.js'
+import http from '@/config/axios.js';
 
 Vue.use(Vuex);
 

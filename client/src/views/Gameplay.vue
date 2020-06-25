@@ -18,6 +18,8 @@
             Card
         },
         created() {
+            this.$store.dispatch('getProducts')
+            this.$store.dispatch('setCategory', localStorage.category)
         },
     }
 </script>
