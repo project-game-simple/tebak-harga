@@ -7,12 +7,10 @@
             <li class="list-group-item" v-for="(user, i) in room.Users" :key="i">{{ i+1 }}. {{user.name}}</li>
         </ul>
         <div class="mt-3 d-flex justify-content-around mb-3">
-            <router-link to="/play">
-                <a  
-                    type="button" class="btn btn-primary text-light" 
-                    v-if="this.$store.state.nickname === admin && room.Users.length > 1"
+            <a  
+                type="button" class="btn btn-primary text-light" @click="play"
+                v-if="this.$store.state.nickname === admin && room.Users.length > 1"
                 >Start</a>
-            </router-link>
             <a type="button" class="btn btn-danger text-light" @click="leaveRoom">leave</a>
         </div>
 
@@ -37,12 +35,20 @@ export default {
                 nickname: this.$store.state.nickname,
             };
             socket.emit('leave-room', payload);
+        },
+        play() {
+            socket.emit('start-game', this.room.id)
+            this.$router.push(`/play/${this.room.id}`);
         }
     },
     created() {
         socket.on('room-detail', data => {
             this.room = data;
             this.admin = data.admin;
+        })
+        socket.on('start-game', () => {
+            // console.log('terima emit dr server')
+            this.$router.push(`/play/${this.room.id}`);
         })
     },
 }

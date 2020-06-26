@@ -11,8 +11,13 @@ export default new Vuex.Store({
     products: [],
     category: '',
     rooms: [],
+    currentProduct: [],
+    tampil: false,
   },
   mutations: {
+    SET_TAMPIL_TRUE(state) {
+      state.tampil = true;
+    },
     SET_NICKNAME(state, nick) {
       state.players.push({nickname: nick, score: 0}) 
       state.nickname = nick
@@ -32,16 +37,23 @@ export default new Vuex.Store({
           el.score += 20
         }
       })
-    }
+    },
+    SET_CPRODUCT(state, data) {
+      state.currentProduct = data;
+    },
   },
   actions: {
+    setTampilTrue({ commit }) {
+      commit('SET_TAMPIL_TRUE');
+    },
     setNickname({ commit }, nick) {
       commit('SET_NICKNAME', nick)
     },
-    getProducts({ commit }) {
-      http.get('/')
+    async getProducts({ commit }) {
+      await http.get('/')
       .then(({ data }) => {
         commit('SET_PRODUCTS', data)
+        return;
       })
       .catch(err => {
         throw(err)
@@ -59,6 +71,9 @@ export default new Vuex.Store({
     },
     setScore({ commit }, nick) {
       commit('SET_SCORE', nick)
+    },
+    setCurrentProduct({ commit }, data) {
+      commit('SET_CPRODUCT', data);
     }
   }
 });
