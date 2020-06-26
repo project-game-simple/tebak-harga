@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import socket from '../config/socket';
 
   export default {
     name: 'Home',
@@ -25,6 +26,7 @@
       setNickname() {
         localStorage.nickname = this.nickname
         this.$store.dispatch('setNickname', this.nickname)
+        socket.emit('login', this.nickname)
       },
     },
 };
