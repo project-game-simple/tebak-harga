@@ -65,7 +65,8 @@
         },
         methods: {
             setCategory() {
-                localStorage.category = this.category
+                console.log(this.category, '< ini this')
+                localStorage.setItem('category', this.category)
                 this.$store.dispatch('setCategory', this.category)
             },
             createRoom() {
@@ -73,11 +74,12 @@
                     admin: this.$store.state.nickname,
                     roomName: this.roomName,
                 };
+                this.setCategory();
                 socket.emit('create-room', payload);
                 this.roomName = '';
             },
             joinRoom(id) {
-                localStorage.category = this.category
+                // localStorage.category = this.category
                 this.$store.dispatch('setCategory', this.category)
                 let payload = {
                     id: id,

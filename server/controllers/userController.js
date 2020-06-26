@@ -7,5 +7,16 @@ class Controller {
             name, RoomId
         });
     }
+    static addScore(nickname){
+        User.findOne({ where: { name: nickname }})
+          .then(data => {
+              return User.update({
+                score: data.score +20 
+              },
+              {
+                where: { name: nickname }
+              })
+          })
+    }
 }
 module.exports = Controller;
