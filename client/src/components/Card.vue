@@ -20,7 +20,7 @@
                
                 <div class="mt-3 d-flex">
                     <input class="form-control shadow-sm" type="number" min="0" 
-                        v-model="price" placeholder="guess price" ref="inputPrice">
+                        v-model="price" placeholder="guess price" ref="inputPrice" required>
                     <button 
                         class="ml-3 btn btn-primary shadow" 
                         data-toggle="modal" data-target="#ModalComplete" 

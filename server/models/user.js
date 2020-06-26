@@ -16,8 +16,14 @@ module.exports = (sequelize, DataTypes) => {
   };
   User.init({
     name: DataTypes.STRING,
+    score: DataTypes.INTEGER,
     RoomId: DataTypes.INTEGER
   }, {
+    hooks: {
+      beforeCreate: (instance) => {
+        instance.score = 0
+      }
+    },
     sequelize,
     modelName: 'User',
   });

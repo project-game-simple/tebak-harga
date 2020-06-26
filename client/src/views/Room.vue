@@ -1,14 +1,21 @@
 <template>
-    <div>
-        <h4>List User in {{room.name}}</h4>
-        <p>Admin: {{admin}}</p>
-        <div class="container">
-            <ul>
-                <li v-for="user in room.Users" :key="user.id">{{user.name}}</li>
-            </ul>
+    <div class="container w-25 mt-5 border border-light shadow">
+        <h4 class="text-secondary">List User in Room: {{room.name}}</h4>
+        <p>Room Master: <span class="bg-warning p-1 rounded">{{admin}}</span></p>
+        <h6>Players: </h6>
+        <ul class="list-group">
+            <li class="list-group-item" v-for="(user, i) in room.Users" :key="i">{{ i+1 }}. {{user.name}}</li>
+        </ul>
+        <div class="mt-3 d-flex justify-content-around mb-3">
+            <router-link to="/play">
+                <a  
+                    type="button" class="btn btn-primary text-light" 
+                    v-if="this.$store.state.nickname === admin && room.Users.length > 1"
+                >Start</a>
+            </router-link>
+            <a type="button" class="btn btn-danger text-light" @click="leaveRoom">leave</a>
         </div>
-        <button v-if="this.$store.state.nickname === admin">Start</button>
-        <button @click="leaveRoom">leave</button>
+
     </div>
 </template>
 
