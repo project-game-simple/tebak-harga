@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     nickname: '',
     products: [],
-    category: ''
+    category: '',
+    rooms: [],
   },
   mutations: {
     SET_NICKNAME(state, nick) {
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     SET_CATEGORY(state, category) {
       state.category = category
     },
+    SET_ROOM(state, room) {
+      state.rooms = room
+    }
   },
   actions: {
     setNickname({ commit }, nick) {
@@ -40,6 +44,9 @@ export default new Vuex.Store({
       } else {
         commit('SET_CATEGORY', category)
       }
+    },
+    setRoom({ commit }, room) {
+      commit('SET_ROOM', room)
     },
   }
 });
