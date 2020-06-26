@@ -5,13 +5,15 @@
         </div>
         <div class="text-center mt-5" v-if="this.$store.state.tampil">
             <div style="width:100%;height:0;padding-bottom:50%;position:relative;">
-                <iframe src="https://giphy.com/embed/rfskmSvktqSoo" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p>
-                <a href="https://giphy.com/gifs/reaction-gif-you-can-never-use-it-too-much-very-useful-in-many-situations-rfskmSvktqSoo">via GIPHY</a></p>    
+                <iframe src="https://giphy.com/embed/rfskmSvktqSoo" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+            </div>   
+        </div>
+        <div class="text-center mt-5">
+            <button v-if="this.$store.state.tampil" type="button" class="btn btn-secondary" @click="toLobby">Back to lobby</button>
         </div>
         <div v-if="!$store.state.tampil" class="d-flex justify-content-center mt-5 text-center">
             <Card></Card>
         </div>
-        <button v-if="this.$store.state.tampil" type="button" class="btn btn-secondary" @click="toLobby">Back to lobby</button>
     </div>
 </template>
 
