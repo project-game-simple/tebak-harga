@@ -58,7 +58,13 @@ io.on('connection', (socket) => {
 			  io.sockets.in(room.name).emit('room-detail', room);
 			})
 		  })
-		  .catch(err => console.log(err));
+		  .catch(err => {
+			  if (err.errors) {
+				console.log(err.errors)
+			  } else {
+				console.log(err)
+			  }
+		  });
 	});
 	// socket.on('leave-room', (data) => {
 		//disini leave room

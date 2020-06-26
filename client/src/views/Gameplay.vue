@@ -4,7 +4,7 @@
             <h2 class="text-secondary">Goodluck, {{ $store.state.nickname }}!</h2>
         </div>
         <div class="d-flex justify-content-center mt-5 text-center">
-            <Card ref="cardss"></Card>
+            <Card></Card>
         </div>
     </div>
 </template>
@@ -18,6 +18,8 @@
             Card
         },
         created() {
+            this.$store.dispatch('getProducts')
+            this.$store.dispatch('setCategory', localStorage.category)
         },
     }
 </script>
